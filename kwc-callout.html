@@ -1,0 +1,239 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+  Custom styles:
+    * --kwc-callout-box (default {})
+    * --kwc-callout-base-bg-color (default #fff)
+    * --kwc-callout-base-text-color (default #000)
+    * --kwc-callout-base-border-color (default #e8e8e8)
+    * --kwc-callout-base-bg-color-success (default #4caf50)
+    * --kwc-callout-base-text-color-success (default #fff)
+    * --kwc-callout-base-border-color-success (default #2e7d32)
+    * --kwc-callout-base-bg-color-warning (default #ffb300)
+    * --kwc-callout-base-text-color-warning (default #fff)
+    * --kwc-callout-base-border-color-warning (default #ff8f00)
+    * --kwc-callout-base-bg-color-alert (default #ff5722)
+    * --kwc-callout-base-text-color-alert (default #fff)
+    * --kwc-callout-base-border-color-alert (default #d84315)
+    * --kwc-callout-base-bg-color-error (default #b71c1c)
+    * --kwc-callout-base-text-color-error (default #fff)
+    * --kwc-callout-base-border-color-error (default #c62828)
+  
+  Properties:
+    * type: The type of callout, do not change the behavior, but only the style (provided: success, alert, warning, error)
+    * header: The search query, updated for each change
+    * show: This component is shown (reflectToAttribute and notify)
+    * closeable: A close button will be shown
+    * autoclose: After the given delay (in milliseconds), the component will be hidden
+-->
+<dom-module id="kwc-callout">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        padding: 0;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        @apply(--kwc-callout-box)
+      }
+      
+      :host.hidden {
+        display: none;
+      }
+      
+      .header,
+      .content {
+        padding: 0.5rem;
+        margin: 0;
+      }
+      
+      .content >::content *:first-child {
+        padding-top: 0;
+        margin-top: 0;
+      }
+      
+      .content >::content *:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+      
+      .content:empty {
+        display: none;
+      }
+      
+      .content:not(.no-title) {
+        border-top-style: solid;
+        border-top-width: 1px;
+      }
+      
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 0.5rem;
+        cursor: pointer;
+        font-size: 2em;
+        font-weight: bold;
+      }
+      
+      /*normal*/
+      :host {
+        background-color: var(--kwc-callout-base-bg-color, #fff);
+      }
+      
+      :host,
+      :host .content >::content a {
+        color: var(--kwc-callout-base-text-color, #000);
+      }
+      
+      :host .content {
+        border-top-color: var(--kwc-callout-base-border-color, #e8e8e8);
+      }
+      
+      /*success*/
+      :host[type=success] {
+        background-color: var(--kwc-callout-base-bg-color-success, #4caf50);
+      }
+      
+      :host[type=success],
+      :host[type=success] .content >::content a {
+        color: var(--kwc-callout-base-text-color-success, #fff);
+      }
+      
+      :host[type=success] .content {
+        border-top-color: var(--kwc-callout-base-border-color-success, #2e7d32);
+      }
+      
+      /*warning*/
+      :host[type=warning] {
+        background-color: var(--kwc-callout-base-bg-color-warning, #ffb300);
+      }
+      
+      :host[type=warning],
+      :host[type=warning] .content >::content a {
+        color: var(--kwc-callout-base-text-color-warning, #fff);
+      }
+      
+      :host[type=warning] .content {
+        border-top-color: var(--kwc-callout-base-border-color-warning, #ff8f00);
+      }
+      
+      /*alert*/
+      :host[type=alert] {
+        background-color: var(--kwc-callout-base-bg-color-alert, #ff5722);
+      }
+      
+      :host[type=alert],
+      :host[type=alert] .content >::content a {
+        color: var(--kwc-callout-base-text-color-alert, #fff);
+      }
+      
+      :host[type=alert] .content {
+        border-top-color: var(--kwc-callout-base-border-color-alert, #d84315);
+      }
+      
+      /*error*/
+      :host[type=error] {
+        background-color: var(--kwc-callout-base-bg-color-error, #b71c1c);
+      }
+      
+      :host[type=error],
+      :host[type=error] .content >::content a {
+        color: var(--kwc-callout-base-text-color-error, #fff);
+      }
+      
+      :host[type=error] .content {
+        border-top-color: var(--kwc-callout-base-border-color-error, #c62828);
+      }
+    </style>
+
+    <span class="close" id="close" hidden$="[[!closeable]]">&times;</span>
+
+    <h3 class="header" hidden$="[[!header]]">{{header}}</h3>
+
+    <div class$="[[_contentClass]]"><content></content></div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'kwc-callout',
+      
+      properties: {
+        type: {
+          type: String,
+          value: null
+        },
+        header: {
+          type: String,
+          value: null
+        },
+        show: {
+          type: Boolean,
+          value: true,
+          reflectToAttribute: true,
+          notify: true,
+          observer: "_showChange"
+        },
+        closeable: {
+          type: Boolean,
+          value: false
+        },
+        autoclose: {
+          type: Number,
+          value: 0
+        },
+        _contentClass: {
+          type: String,
+          computed: "_computeContentClass(title)"
+        }
+      },
+      
+      listeners: {
+        "close.tap": "_closeTap"
+      },
+      
+      attached: function() {
+        if (this.show) {
+          this._autoclose()
+        }
+      },
+      
+      _computeContentClass: function(title) {
+        if (title) {
+          return "content"
+        } else {
+          return "content no-title"
+        }
+      },
+      
+      _showChange: function(value) {
+        if (this._timerClose) {
+          clearTimeout(this._timerClose)
+          this._timerClose = null
+        }
+        
+        if (value) {
+          this.classList.remove("hidden")
+          this._autoclose()
+        } else {
+          this.classList.add("hidden")
+        }
+      },
+      
+      _autoclose: function() {
+        if (this.autoclose > 0) {
+          var that = this
+          this._timerClose = setTimeout(function(){
+            that.show = false
+          }, this.autoclose)
+        }
+      },
+      
+      _closeTap: function(e) {
+        e.preventDefault()
+        this.show = false
+      }
+    })
+  </script>
+</dom-module>

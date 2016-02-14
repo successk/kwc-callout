@@ -1,0 +1,27 @@
+{
+  "name": "kwc-callout",
+  "version": "0.1.0",
+  "description": "A panel which call out a block of text",
+  "license": "MIT",
+  "main": "kwc-callout.html",
+  "keywords": [
+    "polymer",
+    "web-component",
+    "callout"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "homepage": "https://github.com/successk/kwc-callout",
+  "authors": [
+    "Gaëtan Rizio <gaetan@rizio.fr>"
+  ],
+  "moduleType": []
+}
