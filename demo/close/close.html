@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>&lt;kwc-callout&gt; – Close</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="../../kwc-callout/kwc-callout.html">
+</head>
+
+<body>
+<div class="example">
+  <kwc-callout header="Closeable" closeable>
+    <p>
+      This callout has property <code>closeable</code>, so you can close it.
+    </p>
+  </kwc-callout>
+</div>
+<div class="example">
+  <kwc-callout header="Not closeable">
+    <p>
+      This callout has not property <code>closeable</code>, so you cannot close it.
+    </p>
+  </kwc-callout>
+</div>
+<div class="example">
+  <kwc-callout header="Autoclose" autoclose="10000">
+    <p>
+      This callout has property <code>autoclose</code> set to <code>10000</code>.
+      It will close in 10s after opening.
+    </p>
+  </kwc-callout>
+</div>
+<div class="example">
+  <kwc-callout header="Autoclose" closeable autoclose="20000">
+    <p>
+      This callout has property <code>autoclose</code> set to <code>20000</code>.
+      It will close in 20s after opening.
+      If it is too long, you can also close it because of <code>closeable</code>.
+    </p>
+  </kwc-callout>
+</div>
+</body>
+
+</html>

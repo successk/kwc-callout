@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<title>&lt;kwc-bootstrap&gt; – Documentation</title>
+</head>
+<body>
+
+<h1><code>&lt;kwc-bootstrap&gt;</code> Documentation</h1>
+
+<div id="kwc-content">
+  <!--[get-started]-->
+
+  <h3>Properties</h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Properties</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><code>header</code></td>
+      <td><code>String</code></td>
+      <td><code>null</code></td>
+      <td>-</td>
+      <td>&times;</td>
+      <td>The callout header</td>
+    </tr>
+    <tr>
+      <td><code>show</code></td>
+      <td><code>Boolean</code></td>
+      <td><code>true</code></td>
+      <td><code>reflectToAttribute</code> + <code>notify</code></td>
+      <td>&times;</td>
+      <td>This component is shown. You can use a variable to change and listen to change of the value.</td>
+    </tr>
+    <tr>
+      <td><code>closeable</code></td>
+      <td><code>Boolean</code></td>
+      <td><code>false</code></td>
+      <td>-</td>
+      <td>&times;</td>
+      <td>If true, a close button will be shown</td>
+    </tr>
+    <tr>
+      <td><code>autoclose</code></td>
+      <td><code>Number</code></td>
+      <td><code>0</code></td>
+      <td>-</td>
+      <td>&times;</td>
+      <td>
+        If set and different from 0, the callout will be closed after <code>{autoclose}</code>ms.
+        The component will not be destroyed, if you want to do so, you will need to do it yourself.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Used for online documentation, will not be shown  -->
+  <kwc-callout header="deprecated properties" class="kwc-callout-warning">
+    <p>From v0.x to v1.x, following properties are deprecated:</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Replacement</th>
+        <th>Comment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>type="{success,warning,alert,error}"</code></td>
+        <td><code>class="kwc-callout-{success,warning,alert,error}"</code></td>
+        <td>
+          We removed callout type and replace it by class names.
+          The type did not change anything on the component behavior, only on its style.
+          To avoid confusion and keep function, we just moved it.
+          See <code>demo/styles</code> for more information.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </kwc-callout>
+
+  <h3>Children selectors</h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Selector</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><code>*</code></td>
+      <td>
+        Content of the callout, can be anything.
+        If there is no content, only the header part will be shown.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Methods</h3>
+
+  <p>
+    This component has no particular method.
+  </p>
+
+  <h3>Events</h3>
+
+  <p>
+    This component has no particular event (except notified attributes).
+  </p>
+
+  <h3>Custom styles</h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><code>--kwc-callout-header</code></td>
+      <td><code>{}</code></td>
+      <td>Styles for header part of callout, when existing</td>
+    </tr>
+    <tr>
+      <td><code>--kwc-callout-content</code></td>
+      <td><code>{}</code></td>
+      <td>
+        Styles for content part of callout, when existing.
+        This should stylizing only content container (eg: margin), not the content himself.
+        If you want to style the content (eg: color), use <code>kwc-callout {selector}</code> instead.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Used for online documentation, will not be shown  -->
+  <kwc-callout header="deprecated styles" class="kwc-callout-warning">
+    <p>From v0.x to v1.x, following styles are deprecated:</p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Replacement</th>
+        <th>Comment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>--kwc-callout-base-bg-color</code></td>
+        <td><code>kwc-callout { background-color: xxx }</code></td>
+        <td rowspan="6">
+          All this styles were removed because they can be easily stylized without custom properties.
+          It should simplify and reduce code.
+        </td>
+      </tr>
+      <tr>
+        <td><code>--kwc-callout-base-text-color</code></td>
+        <td><code>kwc-callout, kwc-callout a { color: xxx }</code></td>
+      </tr>
+      <tr>
+        <td><code>--kwc-callout-base-border-color</code></td>
+        <td><code>kwc-callout { --kwc-callout-content: { border-top-color: xxx } }</code></td>
+      </tr>
+      <tr>
+        <td><code>--kwc-callout-base-bg-color-{success,warning,alert,error}</code></td>
+        <td><code>kwc-callout.kwc-callout-{success,warning,alert,error} { background-color: xxx }</code></td>
+      </tr>
+      <tr>
+        <td><code>--kwc-callout-base-text-color-{success,warning,alert,error}</code></td>
+        <td>
+          <code>
+            kwc-callout.kwc-callout-{success,warning,alert,error},
+            <br>
+            kwc-callout.kwc-callout-{success,warning,alert,error} a
+            <br>
+            { color: xxx }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>--kwc-callout-base-border-color-{success,warning,alert,error}</code></td>
+        <td><code>kwc-callout.kwc-callout-{success,warning,alert,error} { --kwc-callout-content: { border-top-color: xxx } }</code></td>
+      </tr>
+      </tbody>
+    </table>
+  </kwc-callout>
+</div>
+</body>
+</html>

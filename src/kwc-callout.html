@@ -1,0 +1,122 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="kwc-callout">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        padding: 0;
+        margin: 0 0 1rem;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      .header, .content {
+        padding: 0.5rem;
+        margin: 0;
+      }
+
+      .header {
+        @apply(--kwc-callout-header);
+      }
+
+      .content > ::content *:first-child {
+        padding-top: 0;
+        margin-top: 0;
+      }
+
+      .content > ::content *:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      .content:empty {
+        display: none;
+      }
+
+      /* Both two following styles include --kwc-callout-content because of border-top which need to be treated before border-top-color. */
+      .content:not(.no-title) {
+        border-top: 1px solid;
+        @apply(--kwc-callout-content);
+      }
+
+      .content.no-title {
+        @apply(--kwc-callout-content);
+      }
+
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 0.5rem;
+        cursor: pointer;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      /*success*/
+      :host.kwc-callout-success {
+        background-color: #4caf50;
+      }
+
+      :host.kwc-callout-success .content {
+        border-top-color: #2e7d32;
+      }
+
+      :host.kwc-callout-success,
+      :host.kwc-callout-success .content > ::content a {
+        color: #fff;
+      }
+
+      /*warning*/
+      :host.kwc-callout-warning {
+        background-color: #ffb300;
+      }
+
+      :host.kwc-callout-warning .content {
+        border-top-color: #ff8f00;
+      }
+
+      :host.kwc-callout-warning,
+      :host.kwc-callout-warning .content > ::content a {
+        color: #fff;
+      }
+
+      /*alert*/
+      :host.kwc-callout-alert {
+        background-color: #ff5722;
+      }
+
+      :host.kwc-callout-alert,
+      :host.kwc-callout-alert .content > ::content a {
+        color: #fff;
+      }
+
+      :host.kwc-callout-alert .content {
+        border-top-color: #d84315;
+      }
+
+      /*error*/
+      :host.kwc-callout-error {
+        background-color: #b71c1c;
+      }
+
+      :host.kwc-callout-error,
+      :host.kwc-callout-error .content > ::content a {
+        color: #fff;
+      }
+
+      :host.kwc-callout-error .content {
+        border-top-color: #c62828;
+      }
+    </style>
+
+    <span class="close" id="close" hidden$="[[!closeable]]">&times;</span>
+
+    <h3 class="header" hidden$="[[!header]]">{{header}}</h3>
+
+    <div class$="[[_contentClass]]"><content></content></div>
+  </template>
+
+  <script src="kwc-callout.js" inline></script>
+</dom-module>

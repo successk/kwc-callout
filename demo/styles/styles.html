@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>&lt;kwc-callout&gt; – Styles</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="../../kwc-callout/kwc-callout.html">
+</head>
+
+<body>
+<div class="example">
+  <kwc-callout header="Default">
+    <p>This callout does not have any class!</p>
+    <p><a href="#">Go to page</a></p>
+  </kwc-callout>
+</div>
+
+<div class="example">
+  <kwc-callout header="Success" class="kwc-callout-success">
+    <p>This callout show a success with class <code>kwc-callout-success</code>!</p>
+    <p><a href="#">Go to page</a></p>
+  </kwc-callout>
+</div>
+
+<div class="example">
+  <kwc-callout header="Warning" class="kwc-callout-warning">
+    <p>This callout show a warning with class <code>kwc-callout-warning</code>!</p>
+    <p><a href="#">Go to page</a></p>
+  </kwc-callout>
+</div>
+
+<div class="example">
+  <kwc-callout header="Alert" class="kwc-callout-alert">
+    <p>This callout show an alert with class <code>kwc-callout-alert</code>!</p>
+    <p><a href="#">Go to page</a></p>
+  </kwc-callout>
+</div>
+
+<div class="example">
+  <kwc-callout header="Error" class="kwc-callout-error">
+    <p>This callout show an error with class <code>kwc-callout-error</code>!</p>
+    <p><a href="#">Go to page</a></p>
+  </kwc-callout>
+</div>
+
+<div class="example">
+  <style is="custom-style">
+    .custom {
+      background-color: #05f;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 2px 0 #0f0, 0 1px 5px 0 #0f0, 0 3px 1px -2px #0f0;
+
+      --kwc-callout-header: {
+        text-decoration: underline;
+      };
+      --kwc-callout-content: {
+        font-style: italic;
+        border-top-color: #0f0;
+      };
+    }
+
+    .custom a {
+      color: #f00;
+    }
+  </style>
+
+  <kwc-callout header="Custom" class="custom">
+    <p>I very good to style my component, so I use my own style!</p>
+    <p><a href="#">Great link!</a></p>
+  </kwc-callout>
+</div>
+</body>
+
+</html>
